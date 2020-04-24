@@ -16,4 +16,21 @@ public class Counter {
 
         return instance;
     }
+
+    public void initialize(long maxValue) {
+        this.maxValue = maxValue;
+        this.counter = 0;
+    }
+
+    public long getCounter() {
+        return counter;
+    }
+
+    public void increment(long count) {
+        counter += count;
+
+        if (counter >= maxValue) {
+            System.out.println("Reached max. value!");
+        }
+    }
 }
