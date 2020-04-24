@@ -7,6 +7,7 @@ public class Counter {
 
     private long counter;
     private long maxValue;
+    private boolean reachedMaxValue;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private Counter() {
@@ -24,6 +25,7 @@ public class Counter {
     public void initialize(long maxValue) {
         this.maxValue = maxValue;
         this.counter = 0;
+        this.reachedMaxValue = false;
     }
 
     public long getCounter() {
@@ -33,7 +35,8 @@ public class Counter {
     public synchronized void increment(long count) {
         counter += count;
 
-        if (counter >= maxValue) {
+        if (!reachedMaxValue && counter >= maxValue) {
+            reachedMaxValue = true;
             pcs.firePropertyChange("counter", counter - count, counter);
         }
     }
