@@ -9,7 +9,7 @@ public class Counter {
 
     }
 
-    public static Counter getInstance() {
+    public synchronized static Counter getInstance() {
         if (instance == null) {
             instance = new Counter();
         }
@@ -26,7 +26,7 @@ public class Counter {
         return counter;
     }
 
-    public void increment(long count) {
+    public synchronized void increment(long count) {
         counter += count;
 
         if (counter >= maxValue) {
