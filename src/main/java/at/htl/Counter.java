@@ -1,9 +1,13 @@
 package at.htl;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Counter {
     private static Counter instance;
+
     private long counter;
     private long maxValue;
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private Counter() {
 
@@ -30,7 +34,11 @@ public class Counter {
         counter += count;
 
         if (counter >= maxValue) {
-            System.out.println("Reached max. value!");
+            pcs.firePropertyChange("counter", counter - count, counter);
         }
+    }
+
+    public void addListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener("counter", listener);
     }
 }

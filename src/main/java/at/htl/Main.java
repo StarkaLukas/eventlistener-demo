@@ -1,5 +1,6 @@
 package at.htl;
 
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Counter.getInstance().initialize(500);
@@ -26,6 +27,10 @@ public class Main {
                 System.out.println("Thread 2 increments counter");
                 Counter.getInstance().increment(10);
             }
+        });
+
+        Counter.getInstance().addListener(propertyChangeEvent -> {
+            System.out.println("Got info that limit was reached");
         });
         
         thread1.start();
