@@ -38,6 +38,8 @@ public class Counter {
         if (!reachedMaxValue && counter >= maxValue) {
             reachedMaxValue = true;
             pcs.firePropertyChange("counter", counter - count, counter);
+        } else if (!reachedMaxValue && counter % 100 == 0) {
+            pcs.firePropertyChange("counter", counter - count, counter);
         }
     }
 
